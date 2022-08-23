@@ -46,6 +46,11 @@ This is a binary crate/utility to decrypt user `PII data` encrypted using `Aes25
    ```
    - Command line parameters `-d` defaults to `mysql` and `-p` to `data.json`
    - Required param is `-q` or `--query` to provide `abstraction or control` over which data to process
+   - two fields `encryption_context` and `encryption_key` are mandatory in query.Example would be like
+        ```mysql
+            SELECT <col1> as encryption_context, <col2> as 'encryption_key', <col3> as 'cipher_text' from <table_name>
+        ```
+   - In the above query cipher_text is the field finally we get decrypted in the json file
    - Right now concrete datasource implementation is provided for `MySql` datasource
    - It expects the following `variables` to be present in the `env`
       - `MYSQL_USER`
@@ -54,5 +59,10 @@ This is a binary crate/utility to decrypt user `PII data` encrypted using `Aes25
       - `MYSQL_PORT`
       - `MYSQL_DATABASE`
    - Can repeat above steps with the provided `Dockerfile` as well
+
+###### TODO
+1. [ ] Parallelize the fields decryption for a given `user/id` as the plain text key is the same with which rest of the `pii fields are encrypted`.Need to look into `aes crate` documentation
+2. [ ] Support multiple aes block .Currently only `cbc` block cipher mode is supported.
+3. [ ] Multiple types of `datasources`.Currently only `mysql datasource` has concrete implementation
 
 
