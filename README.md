@@ -42,7 +42,7 @@ This is a binary crate/utility to decrypt user `PII data` encrypted using `Aes25
 #    application uses `clap` crate, so we can use --help to provide help with parameters required
 #   ./target/release/kms_decryption_utility --help
    cargo build --release
-   ./target/release/kms_decryption_utility -- -d "<datasource_type>" -q "<query>" -p "<output_path>"
+   RUST_LOG=info ./target/release/kms_decryption_utility -- -d "<datasource_type>" -q "<query>" -p "<output_path>"
    ```
    - Command line parameters `-d` defaults to `mysql` and `-p` to `data.json`
    - Required param is `-q` or `--query` to provide `abstraction or control` over which data to process
